@@ -47,9 +47,21 @@ async function readFile(filePath) {
     });
     return new Game(game, goodGameSets);
   });
-  gamesResult.forEach((game) =>
-    game.gameSets.forEach((gameset) =>
-      gameset.rolls.forEach((roll) => console.log(roll))
+
+  const a = gamesResult
+    .filter(
+      (game) =>
+        game.gameSets.filter((gameset) => {
+          return (
+            gameset.rolls.filter(
+              (roll) =>
+                (roll.color == "red" && roll.num > 12) ||
+                (roll.color == "green" && roll.num > 13) ||
+                (roll.color == "blue" && roll.num > 14)
+            ).length !== 0
+          );
+        }) == 0
     )
-  );
+    .reduce((acc, curr) => acc + curr.id, 0);
+  console.log(a);
 })();
