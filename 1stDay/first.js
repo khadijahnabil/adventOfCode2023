@@ -33,7 +33,7 @@ async function readFile(filePath) {
   }
 }
 (async () => {
-  const arr = await readFile("testData.txt");
+  const arr = await readFile("input1.txt");
   const res = arr
     .map((line) => {
       const first = getFirstNumber(line, numbers);
